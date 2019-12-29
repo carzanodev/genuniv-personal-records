@@ -3,16 +3,21 @@ package carzanodev.genuniv.microservices.precord.cache;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import carzanodev.genuniv.microservices.common.cache.ApiCache;
 import carzanodev.genuniv.microservices.common.model.dto.StandardResponse;
 import carzanodev.genuniv.microservices.precord.cache.model.CollegeDTO;
+import carzanodev.genuniv.microservices.precord.cache.model.CollegeDTO.List;
 import carzanodev.genuniv.microservices.precord.config.IntraServiceProperties;
 
 @Component
 public class CollegeApiCache extends ApiCache<Integer, CollegeDTO, CollegeDTO.List> {
+
+    private static final ParameterizedTypeReference<StandardResponse<CollegeDTO.List>> responseType = new ParameterizedTypeReference<>() {
+    };
 
     @Autowired
     public CollegeApiCache(RestTemplate restTemplate, IntraServiceProperties properties) {
@@ -20,6 +25,11 @@ public class CollegeApiCache extends ApiCache<Integer, CollegeDTO, CollegeDTO.Li
                 restTemplate,
                 properties.getCollege().getCollegeApiUrl(),
                 properties.getCollege().getCollegeApiUrl() + "/info");
+    }
+
+    @Override
+    protected ParameterizedTypeReference<StandardResponse<List>> getResponseType() {
+        return responseType;
     }
 
     @Override
