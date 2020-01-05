@@ -10,7 +10,6 @@ import org.springframework.web.client.RestTemplate;
 import carzanodev.genuniv.microservices.common.cache.ApiCache;
 import carzanodev.genuniv.microservices.common.model.dto.StandardResponse;
 import carzanodev.genuniv.microservices.precord.cache.model.DegreeDTO;
-import carzanodev.genuniv.microservices.precord.cache.model.DegreeDTO.List;
 import carzanodev.genuniv.microservices.precord.config.IntraServiceProperties;
 
 @Component
@@ -28,7 +27,7 @@ public class DegreeApiCache extends ApiCache<Integer, DegreeDTO, DegreeDTO.List>
     }
 
     @Override
-    protected ParameterizedTypeReference<StandardResponse<List>> getResponseType() {
+    protected ParameterizedTypeReference<StandardResponse<DegreeDTO.List>> getResponseType() {
         return responseType;
     }
 
