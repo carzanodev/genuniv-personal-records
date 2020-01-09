@@ -12,3 +12,11 @@ This service uses [genuniv-common-service](https://github.com/carzanodev/genuniv
 1. `/api/v1/student`
 2. `/api/v1/faculty`
 3. `/api/v1/staff`
+
+# 3. Data Dependencies
+The personal-records service requests data from the following services via its APIs:
+1. [college-service](https://github.com/carzanodev/genuniv-college-service)
+    * College
+    * Degree
+    
+The retrieval of the data are done via a dedicated thread that periodically requests from the APIs. The data are also being cached afterwards.
